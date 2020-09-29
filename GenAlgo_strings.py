@@ -116,7 +116,7 @@ for gen in range(max_gen_num):  # iterate for a fixed number of generations.
 
 plt.title('Strings - Population Average Fitness')
 plt.ylabel('Fitness')
-plt.xlabel('Generations')
+plt.xlabel('Generation')
 x = [i + 1 for i in range(gen + 1)]
 plt.plot(x, pop_avg_fit_history)
 if not path.isdir('results'):

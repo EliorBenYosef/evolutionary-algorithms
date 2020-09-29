@@ -187,7 +187,7 @@ for i in range(gen_num):
 
 plt.title('CartPole - Population Average Fitness')
 plt.ylabel('Fitness')
-plt.xlabel('Generations')
+plt.xlabel('Generation')
 x = [i + 1 for i in range(gen_num)]
 plt.plot(x, pop_avg_fit_history)
 if not path.isdir('results'):
