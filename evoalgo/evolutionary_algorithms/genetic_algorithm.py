@@ -3,9 +3,9 @@ Genetic Algorithms
 """
 
 import numpy as np
-from util_GeneticOperators import Selection
 import torch
-from const import KEY_PARAMS_VEC, KEY_FITNESS
+from evoalgo.const import KEY_PARAMS_VEC, KEY_FITNESS
+from evoalgo.utils.genetic_operators import Selection
 
 
 class SimpleGA:
@@ -18,10 +18,10 @@ class SimpleGA:
         """
         :param params_num: number of model parameters
         :param pop_size: population size
-        :param kwargs: selection_var (top_size / tournament_size / truncation_size / elite_size), mutation_var (mut_rate / sigma)
-                sigma_init: initial STD
-                sigma_decay: anneal STD. sigma_decay=0.999 --> don't anneal the STD
-
+        :param kwargs: selection_var (top_size / tournament_size / truncation_size / elite_size),
+               mutation_var (mut_rate / sigma)
+               sigma_init: initial STD
+               sigma_decay: anneal STD. sigma_decay=1 --> don't anneal the STD
         """
         self.params_num = params_num
         self.pop_size = pop_size

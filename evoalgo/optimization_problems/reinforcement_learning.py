@@ -9,24 +9,16 @@ import torch.distributions
 import torch.nn.functional
 import gym
 
-from algo_GA import SimpleGA
-from algo_ES import CMA_ES, PEPG, OpenAI_ES
-from utils import Evolution
-from util_GeneticOperators import Selection, Crossover, Mutation
-
-#########################################
-
-# adjustable variables:
-
-hidden_layers_units = [25, 10]  # The individual NN hidden layers
-
 max_gen_num = 25
 pop_size = 500
 
 env_name = 'CartPole-v0'
 input_dims = 4  # input layer
 n_actions = 2  # output layer
+optimal_fit = None
 
+hidden_layers_units = [25, 10]  # The individual NN hidden layers
+is_torch = True
 
 #########################################
 
@@ -39,6 +31,7 @@ for i in range(len(hidden_layers_units) + 1):
     v_prev = input_dims if i == 0 else hidden_layers_units[i - 1]
     layers_weights_shapes.append((v_curr, v_prev))
     params_num += (v_curr * (v_prev + 1))
+task_name = 'CartPole' + str(params_num) + 'D'
 
 
 def split_model_params_vec(params_vec):
@@ -96,12 +89,3 @@ def fitness_function(individual_params):
         s = torch.from_numpy(s_).float()
         fitness_score += r
     return fitness_score
-
-
-#########################################
-
-ga = SimpleGA(params_num, pop_size, is_torch=True, selection_var=0.2, mutation_var=1e-2)  # 1e-3
-Evolution.test_solver(ga, max_gen_num, env_name, fitness_function,
-                      selection_f=Selection.tournament,
-                      crossover_f=Crossover.single_pt,
-                      mutation_f=Mutation.deterministic)

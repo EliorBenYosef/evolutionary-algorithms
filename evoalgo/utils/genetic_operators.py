@@ -1,12 +1,11 @@
 """
-(Parents) Selection Methods
-the methods here construct new population (create the next generation).
+Genetic Operators.
 """
 
 import random
 import numpy as np
 import torch
-from const import KEY_PARAMS_VEC, KEY_FITNESS
+from evoalgo.const import KEY_PARAMS_VEC, KEY_FITNESS
 
 
 class Selection:
@@ -38,7 +37,7 @@ class Selection:
         Stochastic Top Sampling (STS) Selection of parents. Stochastic selection method.
         selecting from the top T (% of the) individuals.
         :param population_sort: sorted population by descending fitness-score.
-        :param top_size: truncation ratio. default: 0.1 -> top 10% of the population.
+        :param top_size: top ratio. default: 0.1 -> top 10% of the population.
         """
         pop_size = len(population_sort)
         rand_elite_pair_indices = np.random.randint(low=0, high=(int(top_size * pop_size)), size=2)
@@ -218,7 +217,7 @@ class Mutation:
     """
 
     @staticmethod
-    def deterministic(individual, params_num, discrete_values_num, is_torch, mut_rate=1e-2):  # 1e-5
+    def deterministic(individual, params_num, discrete_values_num, is_torch, mut_rate=1e-2):
         """
         mutation by randomly changing a proportional number elements of the parameter vector.
         recommended for a high number of params (long vectors - NN params).
@@ -244,7 +243,7 @@ class Mutation:
         return individual
 
     @staticmethod
-    def stochastic_uniform(individual, params_num, discrete_values_num, is_torch, mut_rate=1e-2):  # 1e-5
+    def stochastic_uniform(individual, params_num, discrete_values_num, is_torch, mut_rate=1e-2):
         """
         mutation by randomly changing a random number elements of the parameter vector.
         recommended for a small number of params (short vectors).
@@ -268,7 +267,7 @@ class Mutation:
         return individual
 
     @staticmethod
-    def gaussian_noise(individual, params_num, discrete_values_num, is_torch, sigma=0.1):
+    def gaussian_noise(individual, params_num, discrete_values_num, is_torch, sigma=0.5):
         """
         Mutation by adding a random noise vector (epsilon),
         which is sampled from a "standard normal" distribution.
