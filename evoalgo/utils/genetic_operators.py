@@ -4,7 +4,6 @@ Genetic Operators.
 
 import random
 import numpy as np
-import torch
 from evoalgo.const import KEY_PARAMS_VEC, KEY_FITNESS
 
 
@@ -32,29 +31,29 @@ class Selection:
         return p1_params, p2_params
 
     @staticmethod
-    def stochastic_top_sampling(population_sort, top_size=0.1):
+    def stochastic_top_sampling(population_sort, top_ratio=0.1):
         """
         Stochastic Top Sampling (STS) Selection of parents. Stochastic selection method.
         selecting from the top T (% of the) individuals.
         :param population_sort: sorted population by descending fitness-score.
-        :param top_size: top ratio. default: 0.1 -> top 10% of the population.
+        :param top_ratio: default: 0.1 -> top 10% of the population.
         """
         pop_size = len(population_sort)
-        rand_elite_pair_indices = np.random.randint(low=0, high=(int(top_size * pop_size)), size=2)
+        rand_elite_pair_indices = np.random.randint(low=0, high=(int(top_ratio * pop_size)), size=2)
 
         p1_params = population_sort[rand_elite_pair_indices[0]][KEY_PARAMS_VEC]
         p2_params = population_sort[rand_elite_pair_indices[1]][KEY_PARAMS_VEC]
         return p1_params, p2_params
 
     @staticmethod
-    def tournament(population, tournament_size=0.2):
+    def tournament(population, tournament_ratio=0.2):
         """
         Tournament Selection of parents. Semi-deterministic selection method.
         the batch is the tournament batch (a subset of the population).
-        :param tournament_size: tournament ratio. default: 0.2 -> random 20% of the population.
+        :param tournament_ratio: default: 0.2 -> random 20% of the population.
         """
         pop_size = len(population)
-        rand_indices = np.random.randint(low=0, high=pop_size, size=(int(tournament_size * pop_size)))
+        rand_indices = np.random.randint(low=0, high=pop_size, size=(int(tournament_ratio * pop_size)))
         batch = np.array([[i, individual[KEY_FITNESS]] for (i, individual) in enumerate(population)
                           if i in rand_indices])
         batch_sort = batch[batch[:, 1].argsort()]  # sort by ascending fitness-score
@@ -112,30 +111,30 @@ class Selection:
 
     # truncation is not operational yet... (there's a TODO)
     @staticmethod
-    def truncation(population_sort, truncation_size=0.1):
+    def truncation(population_sort, truncation_ratio=0.1):
         """
         Truncation Selection of parents. Deterministic selection method.
         selecting the top T (% of the) individuals.
         :param population_sort: sorted population by descending fitness-score.
-        :param truncation_size: truncation ratio. default: 0.1 -> top 10% of the population.
-        :return: a list of parameters of (N * truncation_size) parents  # TODO: to be randomly? paired (non-identical individuals), recombined and mutated.
+        :param truncation_ratio: default: 0.1 -> top 10% of the population.
+        :return: a list of parameters of (N * truncation_ratio) parents  # TODO: to be randomly? paired (non-identical individuals), recombined and mutated.
         """
         pop_size = len(population_sort)
-        p_params_list = [individual[KEY_PARAMS_VEC] for individual in population_sort[:int(truncation_size * pop_size)]]
+        p_params_list = [individual[KEY_PARAMS_VEC] for individual in population_sort[:int(truncation_ratio * pop_size)]]
 
         return p_params_list
 
     @staticmethod
-    def elitism(population_sort, elite_size=0.1):
+    def elitism(population_sort, elite_ratio=0.1):
         """
         Elitism Selection of individuals. Deterministic selection method.
         :param population_sort: sorted population by descending fitness-score.
-        :param elite_size: elite ratio. default: 0.1 -> top 10% of the population.
+        :param elite_ratio: default: 0.1 -> top 10% of the population.
         :return: a list of individuals, to be directly copied to the next generation's (new) population.
         """
         pop_size = len(population_sort)
         individuals_list = []
-        for individual in population_sort[:int(elite_size * pop_size)]:
+        for individual in population_sort[:int(elite_ratio * pop_size)]:
             individuals_list.append({KEY_PARAMS_VEC: individual[KEY_PARAMS_VEC], KEY_FITNESS: None})
         return individuals_list
 
@@ -147,7 +146,7 @@ class Crossover:
     """
 
     @staticmethod
-    def single_pt(p1, p2, params_num, is_torch):
+    def single_pt(p1, p2, params_num):
         """
         Positional method.
         :param p1: p1_params
@@ -157,16 +156,16 @@ class Crossover:
         """
         cross_pt = np.random.randint(low=1, high=params_num)
 
-        o1 = torch.clone(p1) if is_torch else np.copy(p1)
+        o1 = np.copy(p1)
         o1[cross_pt:] = p2[cross_pt:]
 
-        o2 = torch.clone(p2) if is_torch else np.copy(p2)
+        o2 = np.copy(p2)
         o2[cross_pt:] = p1[cross_pt:]
 
         return o1, o2
 
     @staticmethod
-    def two_pt(p1, p2, params_num, is_torch):
+    def two_pt(p1, p2, params_num):
         """
         Positional method.
         :param p1: p1_params
@@ -183,16 +182,16 @@ class Crossover:
                 else:
                     cross_pt_low, cross_pt_high = cross_pt_2, cross_pt_1
 
-        o1 = torch.clone(p1) if is_torch else np.copy(p1)
+        o1 = np.copy(p1)
         o1[cross_pt_low:cross_pt_high] = p2[cross_pt_low:cross_pt_high]
 
-        o2 = torch.clone(p2) if is_torch else np.copy(p2)
+        o2 = np.copy(p2)
         o2[cross_pt_low:cross_pt_high] = p1[cross_pt_low:cross_pt_high]
 
         return o1, o2
 
     @staticmethod
-    def uniform(p1, p2, params_num, is_torch):
+    def uniform(p1, p2, params_num):
         """
         Non-positional method.
         :param p1: p1_params
@@ -202,10 +201,10 @@ class Crossover:
         """
         indices = np.where(np.random.rand(params_num) > 0.5)
 
-        o1 = torch.clone(p1) if is_torch else np.copy(p1)
+        o1 = np.copy(p1)
         o1[indices] = p2[indices]
 
-        o2 = torch.clone(p2) if is_torch else np.copy(p2)
+        o2 = np.copy(p2)
         o2[indices] = p1[indices]
 
         return o1, o2
@@ -217,7 +216,7 @@ class Mutation:
     """
 
     @staticmethod
-    def deterministic(individual, params_num, discrete_values_num, is_torch, mut_rate=1e-2):
+    def deterministic(individual, params_num, discrete_values_num, mut_rate=1e-2):
         """
         mutation by randomly changing a proportional number elements of the parameter vector.
         recommended for a high number of params (long vectors - NN params).
@@ -232,18 +231,16 @@ class Mutation:
             mut_indices = np.random.randint(low=0, high=params_num, size=(mut_num,))
             if discrete_values_num is not None:
                 # randomly flipping values (replacing them with random values)
-                individual[mut_indices] = \
-                    torch.randint(low=0, high=discrete_values_num, size=(mut_num,)) if is_torch else \
-                    np.random.randint(low=0, high=discrete_values_num, size=mut_num)
+                individual[mut_indices] = np.random.randint(low=0, high=discrete_values_num, size=mut_num)
             else:
                 # sample a random number from a standard normal distribution (mean 0, variance 1)
                 # the division gives a number which is close to 0 -> good for the NN weights.
-                individual[mut_indices] = (torch.randn(mut_num) if is_torch else np.random.randn(mut_num)) / 10.0  # TODO: test with 2.0, 10.0, and without
+                individual[mut_indices] = np.random.randn(mut_num) / 10.0  # TODO: test with 2.0, 10.0, and without
 
         return individual
 
     @staticmethod
-    def stochastic_uniform(individual, params_num, discrete_values_num, is_torch, mut_rate=1e-2):
+    def stochastic_uniform(individual, params_num, discrete_values_num, mut_rate=1e-2):
         """
         mutation by randomly changing a random number elements of the parameter vector.
         recommended for a small number of params (short vectors).
@@ -256,18 +253,16 @@ class Mutation:
             if random.random() < mut_rate:
                 if discrete_values_num is not None:
                     # randomly flipping values (replacing them with random values)
-                    individual[i] = \
-                        torch.randint(low=0, high=discrete_values_num, size=(1,)) if is_torch else \
-                        np.random.randint(low=0, high=discrete_values_num)
+                    individual[i] = np.random.randint(low=0, high=discrete_values_num)
                 else:
                     # sample a random number from a standard normal distribution (mean 0, variance 1)
                     # the division gives a number which is close to 0 -> good for the NN weights.
-                    individual[i] = (torch.randn(1) if is_torch else np.random.randn()) / 10.0  # TODO: test with 2.0, 10.0, and without
+                    individual[i] = np.random.randn() / 10.0  # TODO: test with 2.0, 10.0, and without
 
         return individual
 
     @staticmethod
-    def gaussian_noise(individual, params_num, discrete_values_num, is_torch, sigma=0.5):
+    def gaussian_noise(individual, params_num, discrete_values_num, sigma=0.5):
         """
         Mutation by adding a random noise vector (epsilon),
         which is sampled from a "standard normal" distribution.
@@ -278,9 +273,9 @@ class Mutation:
         :return: individual's mutated params
         """
         # sample a random number from a standard normal distribution (mean 0, variance 1)
-        epsilon = (torch.randn(params_num) if is_torch else np.random.randn(params_num)) * sigma
+        epsilon = np.random.randn(params_num) * sigma
         if discrete_values_num is not None:
-            epsilon_disctere = torch.zeros(params_num, dtype=torch.int32) if is_torch else np.zeros(params_num, dtype=np.int32)
+            epsilon_disctere = np.zeros(params_num, dtype=np.int32)
             for i in range(params_num):
                 epsilon_disctere[i] = int(round(epsilon[i]))
             epsilon = epsilon_disctere
@@ -295,3 +290,19 @@ class Mutation:
                     individual[i] = discrete_values_num - 1
 
         return individual
+
+    @staticmethod
+    def sample_epsilon(pop_size, params_num, antithetic_sampling=False):
+        """
+        sampling epsilon (gaussian-noise vector), which constitutes the mutation.
+        :param params_num: vector's length
+        :param antithetic_sampling:
+        :return: epsilon (gaussian-noise vector)
+        """
+        if antithetic_sampling:
+            epsilon_half = np.random.randn(int(pop_size / 2), params_num)
+            epsilon = np.concatenate([epsilon_half, -epsilon_half])
+        else:
+            epsilon = np.random.randn(pop_size, params_num)
+
+        return epsilon

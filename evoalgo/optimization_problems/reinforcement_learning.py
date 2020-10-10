@@ -77,6 +77,9 @@ def fitness_function(individual_params):
     (until it loses the game and returns the number of time steps it lasted as its fitness score).
     :return: individual's fitness score
     """
+    if isinstance(individual_params, np.ndarray):
+        individual_params = torch.as_tensor(individual_params, dtype=torch.float32)
+
     params_by_layer = split_model_params_vec(individual_params)
 
     done = False

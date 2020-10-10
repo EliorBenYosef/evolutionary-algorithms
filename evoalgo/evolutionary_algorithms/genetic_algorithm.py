@@ -3,7 +3,6 @@ Genetic Algorithms
 """
 
 import numpy as np
-import torch
 from evoalgo.const import KEY_PARAMS_VEC, KEY_FITNESS
 from evoalgo.utils.genetic_operators import Selection
 
@@ -13,15 +12,14 @@ class SimpleGA:
     Simple Genetic Algorithm.
     """
 
-    def __init__(self, params_num, pop_size=256, discrete_values_num=None, enable_elitism_selection=True,
-                 is_torch=False, selection_var=None, mutation_var=None, **kwargs):
+    def __init__(self, params_num, pop_size, discrete_values_num=None, enable_elitism_selection=True,
+                 selection_var=None, mutation_var=None, **kwargs):
         """
         :param params_num: number of model parameters
         :param pop_size: population size
-        :param kwargs: selection_var (top_size / tournament_size / truncation_size / elite_size),
-               mutation_var (mut_rate / sigma)
-               sigma_init: initial STD
-               sigma_decay: anneal STD. sigma_decay=1 --> don't anneal the STD
+        :param selection_var: top_size / tournament_size / truncation_size / elite_size
+        :param mutation_var: mut_rate / sigma = sigma_init: initial STD
+        :param kwargs: sigma_decay: anneal STD. sigma_decay=1 --> don't anneal the STD
         """
         self.params_num = params_num
         self.pop_size = pop_size
@@ -31,8 +29,8 @@ class SimpleGA:
         self.set_mutation_var(**kwargs)
 
         self.discrete_values_num = discrete_values_num
-        self.is_torch = is_torch
 
+        self.population = None
         self.top_individual = None
         self.pop_avg_fit_history = []
         self.pop_max_fit_history = []
@@ -42,6 +40,14 @@ class SimpleGA:
             self.sigma_min = kwargs.get('sigma_min')
         if kwargs.get('sigma_decay'):
             self.sigma_decay = kwargs.get('sigma_decay')
+
+    def evolve(self, i, fitness_f, selection_f, crossover_f, mutation_f):
+        self.init_pop() if i == 0 else self.update_pop(selection_f, crossover_f, mutation_f)  # TODO: remove: # solutions = solver.ask()
+        self.eval_pop(fitness_f)
+
+        if i != 0 and hasattr(self, 'sigma_decay') and hasattr(self, 'sigma_min'):
+            if self.mutation_var > self.sigma_min:  # stop annealing if less than sigma_min
+                self.mutation_var *= self.sigma_decay  # decay sigma.
 
     def init_pop(self):
         """
@@ -53,11 +59,10 @@ class SimpleGA:
         for i in range(self.pop_size):
 
             if self.discrete_values_num is not None:
-                param = torch.randint(low=0, high=self.discrete_values_num, size=(self.params_num,)) if self.is_torch else \
-                    np.random.randint(low=0, high=self.discrete_values_num, size=self.params_num)
+                param = np.random.randint(low=0, high=self.discrete_values_num, size=self.params_num)
             else:
                 # sample a random number from a standard normal distribution (mean 0, variance 1)
-                param = torch.randn(self.params_num) if self.is_torch else np.random.randn(self.params_num)
+                param = np.random.randn(self.params_num)
                 # the division gives a number which is close to 0 -> good for the NN weights.
                 param /= 2.0  # TODO: test with 2.0, 10.0, and without
 
@@ -70,8 +75,6 @@ class SimpleGA:
         :param crossover_f: crossover function
         :param mutation_f: mutation function
         """
-        pop_size = len(self.population)
-
         if self.enable_elitism_selection or \
                 selection_f.__name__ == Selection.stochastic_universal_sampling.__name__ or \
                 selection_f.__name__ == Selection.stochastic_top_sampling.__name__:
@@ -83,15 +86,15 @@ class SimpleGA:
         if self.enable_elitism_selection:
             new_pop.extend(Selection.elitism(self.population))
 
-        while len(new_pop) < pop_size:
+        while len(new_pop) < self.pop_size:
             p1_params, p2_params = \
                 selection_f(self.population) if self.selection_var is None else \
                 selection_f(self.population, self.selection_var)
-            offspring = crossover_f(p1_params, p2_params, self.params_num, self.is_torch)
+            offspring = crossover_f(p1_params, p2_params, self.params_num)
             for o in offspring:
                 mut_offspring = \
-                    mutation_f(o, self.params_num, self.discrete_values_num, self.is_torch) if self.mutation_var is None else \
-                    mutation_f(o, self.params_num, self.discrete_values_num, self.is_torch, self.mutation_var)
+                    mutation_f(o, self.params_num, self.discrete_values_num) if self.mutation_var is None else \
+                    mutation_f(o, self.params_num, self.discrete_values_num, self.mutation_var)
                 new_pop.append({KEY_PARAMS_VEC: mut_offspring, KEY_FITNESS: None})
 
         self.population = new_pop
@@ -113,8 +116,7 @@ class SimpleGA:
 
             if top_individual is None or fit > top_individual[KEY_FITNESS]:
                 top_individual = {
-                    KEY_PARAMS_VEC: torch.clone(individual[KEY_PARAMS_VEC]) if self.is_torch else
-                    np.copy(individual[KEY_PARAMS_VEC]),
+                    KEY_PARAMS_VEC: np.copy(individual[KEY_PARAMS_VEC]),
                     KEY_FITNESS: individual[KEY_FITNESS]
                 }
 
@@ -125,15 +127,6 @@ class SimpleGA:
 
         if self.top_individual is None or top_individual[KEY_FITNESS] > self.top_individual[KEY_FITNESS]:
             self.top_individual = {
-                KEY_PARAMS_VEC: torch.clone(top_individual[KEY_PARAMS_VEC]) if self.is_torch else
-                np.copy(top_individual[KEY_PARAMS_VEC]),
+                KEY_PARAMS_VEC: np.copy(top_individual[KEY_PARAMS_VEC]),
                 KEY_FITNESS: top_individual[KEY_FITNESS]
             }
-
-    def evolve(self, i, fitness_f, selection_f, crossover_f, mutation_f):
-        self.init_pop() if i == 0 else self.update_pop(selection_f, crossover_f, mutation_f)
-        self.eval_pop(fitness_f)
-
-        if i != 0 and hasattr(self, 'sigma_decay') and hasattr(self, 'sigma_min'):
-            if self.mutation_var > self.sigma_min:  # stop annealing if less than sigma_min
-                self.mutation_var *= self.sigma_decay  # decay sigma.
