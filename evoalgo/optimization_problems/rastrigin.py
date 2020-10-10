@@ -13,8 +13,6 @@ task_name = 'Rastrigin' + str(params_num) + 'D'
 # optimal_fit = 0  # global maximum point  # TODO: uncomment when optimization problem is solved
 optimal_fit = None  # TODO: remove when optimization problem is solved
 
-is_torch = False
-
 
 def rastrigin_function(x):
     """

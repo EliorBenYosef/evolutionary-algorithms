@@ -18,7 +18,6 @@ n_actions = 2  # output layer
 optimal_fit = None
 
 hidden_layers_units = [25, 10]  # The individual NN hidden layers
-is_torch = True
 
 #########################################
 

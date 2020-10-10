@@ -23,8 +23,6 @@ pop_size = 1000
 task_name = 'String' + str(params_num) + 'D'
 optimal_fit = 1  # max similarity of SequenceMatcher
 
-is_torch = False
-
 
 def convert_indices_to_string(individual_params):
     individual_string = ''
