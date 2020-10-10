@@ -7,7 +7,7 @@ import numpy as np
 max_gen_num = 1000  # max_iter_num # number of generations to run each solver  # TODO: 5000
 pop_size = 100
 
-params_num = 100  # number of model parameters (expresses the problem's dimensionality)  # TODO: 100
+params_num = 100  # number of model parameters (expresses the problem's dimensionality)
 
 task_name = 'Rastrigin' + str(params_num) + 'D'
 # optimal_fit = 0  # global maximum point  # TODO: uncomment when optimization problem is solved
@@ -41,6 +41,10 @@ def fitness_function(individual_params):
 
 def test_fitness_function():
     x = np.zeros(params_num)
-    print("F(x) = ", fitness_function(x))
+    print(f"F(zeros(params_num)) = {fitness_function(x)}")
     x = np.ones(params_num) * 10.
-    print("F(x) = ", fitness_function(x))
+    print(f"F(ones(params_num) * 10) = {fitness_function(x)}")
+
+
+if __name__ == '__main__':
+    test_fitness_function()
