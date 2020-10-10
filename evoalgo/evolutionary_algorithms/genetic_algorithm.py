@@ -42,7 +42,7 @@ class SimpleGA:
             self.sigma_decay = kwargs.get('sigma_decay')
 
     def evolve(self, i, fitness_f, selection_f, crossover_f, mutation_f):
-        self.init_pop() if i == 0 else self.update_pop(selection_f, crossover_f, mutation_f)  # TODO: remove: # solutions = solver.ask()
+        self.init_pop() if i == 0 else self.update_pop(selection_f, crossover_f, mutation_f)
         self.eval_pop(fitness_f)
 
         if i != 0 and hasattr(self, 'sigma_decay') and hasattr(self, 'sigma_min'):
