@@ -300,6 +300,7 @@ class Mutation:
         :return: epsilon (gaussian-noise vector)
         """
         if antithetic_sampling:
+            # half of the population have some params, and the other half has the opposite params (sign change)
             epsilon_half = np.random.randn(int(pop_size / 2), params_num)
             epsilon = np.concatenate([epsilon_half, -epsilon_half])
         else:

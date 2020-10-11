@@ -4,14 +4,13 @@ Optimizing: Rastrigin function params.
 
 import numpy as np
 
-max_gen_num = 1000  # max_iter_num # number of generations to run each solver  # TODO: 5000
+max_gen_num = 1000  # number of generations (iterations) to run each solver
 pop_size = 100
 
 params_num = 100  # number of model parameters (expresses the problem's dimensionality)
 
 task_name = 'Rastrigin' + str(params_num) + 'D'
-# optimal_fit = 0  # global maximum point  # TODO: uncomment when optimization problem is solved
-optimal_fit = None  # TODO: remove when optimization problem is solved
+optimal_fit = 0  # global maximum point
 
 
 def rastrigin_function(x):
