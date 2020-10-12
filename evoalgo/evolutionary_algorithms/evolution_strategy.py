@@ -3,9 +3,9 @@ Evolution Strategy Algorithms.
 Implemented only for real-number vector optimization.
 """
 
+import numpy as np
 from cma import CMAEvolutionStrategy
 
-import numpy as np
 from evoalgo.const import KEY_PARAMS_VEC, KEY_FITNESS
 import evoalgo.utils.optimizers as optimizers
 from evoalgo.utils.fitness_shaping import compute_zero_centered_ranks

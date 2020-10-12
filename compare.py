@@ -1,3 +1,5 @@
+import datetime
+
 import evoalgo.evolutionary_algorithms.genetic_algorithm as GA
 import evoalgo.evolutionary_algorithms.evolution_strategy as ES
 import evoalgo.utils.genetic_operators as GenOp
@@ -5,7 +7,6 @@ from evoalgo.utils.evolution_process import Evolution
 from evoalgo.utils.utils import Plotter
 from evoalgo.optimization_problems.reinforcement_learning import max_gen_num, pop_size, params_num, task_name, \
     fitness_function, optimal_fit  # , discrete_values_num  # import only when optimizing the string
-import datetime
 
 discrete_values_num = None
 

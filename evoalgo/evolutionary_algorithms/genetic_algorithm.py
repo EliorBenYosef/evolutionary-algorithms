@@ -3,6 +3,7 @@ Genetic Algorithms
 """
 
 import numpy as np
+
 from evoalgo.const import KEY_PARAMS_VEC, KEY_FITNESS
 from evoalgo.utils.genetic_operators import Selection
 

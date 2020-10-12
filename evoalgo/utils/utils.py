@@ -1,5 +1,6 @@
 from os import path, mkdir
 from matplotlib import pyplot as plt
+
 from evoalgo.const import KEY_PARAMS_VEC, KEY_FITNESS
 
 
