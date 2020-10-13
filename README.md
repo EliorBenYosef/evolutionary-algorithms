@@ -69,19 +69,6 @@ optimization process results:
 
 ## Evolutionary Algorithms Comparison
 
-#### String (12 characters)
-Notice how the optimization is better with a larger population size.
-
-<p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/String12D-Pop1000-Avg.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/String12D-Pop1000-Max.png" width="400">
-</p>
-
-<p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/String12D-Pop100-Avg.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/String12D-Pop100-Max.png" width="400">
-</p>
-
 #### Rastrigin function (100 input parameters)
 
 <p align="left">
@@ -99,6 +86,19 @@ layers: 4-25-10-2.
 </p>
 
 ## Genetic Algorithms Comparison
+
+#### String (12 characters)
+Notice how the optimization is better with a larger population size.
+
+<p align="left">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/String12D-Pop1000-Avg.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/String12D-Pop1000-Max.png" width="400">
+</p>
+
+<p align="left">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/String12D-Pop100-Avg.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/String12D-Pop100-Max.png" width="400">
+</p>
 
 #### Rastrigin function (100 input parameters)
 Notice how the optimization is better with a higher (and constant) mutation sigma.
