@@ -15,7 +15,7 @@ Evolutionary Algorithms implementations, for various (discrete & continuous) opt
 * [String](../master/evoalgo/optimization_problems/string_opt.py) - 
 optimizing a fixed-length String (discrete-valued vector) towards a chosen target String of 12 characters.
   * For generality purposes, the String (individual & target) is converted into a discrete-number vector (and vice-versa), 
-    which is optimized.
+  which is optimized.
 * [Rastrigin function](../master/evoalgo/optimization_problems/rastrigin.py) -
 optimizing the Rastrigin function's input parameters (x).
 * [Policy Neural-Network](../master/evoalgo/optimization_problems/policy_nn.py) 
@@ -39,10 +39,12 @@ and the slower the optimization process is.
 ### Table of contents:
 
 * [Intro](https://github.com/EliorBenYosef/evolutionary-algorithms#intro)
+  * [Evolutionary Algorithms](https://github.com/EliorBenYosef/evolutionary-algorithms#evolutionary-algorithms)
+  * [Optimization Problems](https://github.com/EliorBenYosef/evolutionary-algorithms#optimization-problems)
+* [Results](https://github.com/EliorBenYosef/evolutionary-algorithms#results)
+  * [Evolutionary Algorithms Comparison](https://github.com/EliorBenYosef/evolutionary-algorithms#evolutionary-algorithms-comparison)
+  * [Genetic Algorithms Comparison](https://github.com/EliorBenYosef/evolutionary-algorithms#genetic-algorithms-comparison)
 * [How to use](https://github.com/EliorBenYosef/evolutionary-algorithms#how-to-use)
-* [Implemented Algorithms](https://github.com/EliorBenYosef/evolutionary-algorithms#implemented-algorithms-rl_tabularpy)
-* [Implemented Environments](https://github.com/EliorBenYosef/evolutionary-algorithms#implemented-environments-envs_dsspy)
-* [Algorithms Performance Examples](https://github.com/EliorBenYosef/evolutionary-algorithms#algorithms-performance-examples)
 
 ## Intro
 
@@ -101,6 +103,11 @@ layers: 4-25-10-2.
 #### Rastrigin function (100 input parameters)
 Notice how the optimization is better with a higher (and constant) mutation sigma.
 
+Legend:
+<p align="center">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Legend.png" width="800">
+</p>
+
 **Sigma = 1**
 <p align="left">
   <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Avg-Sigma1.png" width="400">
@@ -117,10 +124,6 @@ Notice how the optimization is better with a higher (and constant) mutation sigm
 <p align="left">
   <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Avg-Sigma0.5_Min0.01_Decay0.9.png" width="400">
   <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Max-Sigma0.5_Min0.01_Decay0.9.png" width="400">
-</p>
-
-<p align="center">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Legend.png" width="400">
 </p>
 
 ## How to use
