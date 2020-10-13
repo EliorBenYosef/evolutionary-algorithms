@@ -19,7 +19,7 @@ pop_size = 500
 env_name = 'CartPole-v0'
 input_dims = 4  # input layer
 n_actions = 2  # output layer
-optimal_fit = None
+optimal_fit = 200  # game automatically terminates after 200 time-steps
 
 hidden_layers_units = [25, 10]  # The individual NN hidden layers
 
