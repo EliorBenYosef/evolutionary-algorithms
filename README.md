@@ -1,7 +1,7 @@
 # Evolutionary Algorithms implementations
 Evolutionary Algorithms implementations, for various (discrete & continuous) optimization problems.
 
-#### TL;DR
+### TL;DR
 
 **Evolutionary Algorithms (EAs):**
 * [Genetic Algorithm (GA)](../master/evoalgo/evolutionary_algorithms/genetic_algorithm.py)
@@ -36,7 +36,7 @@ Optimization problem | Type | Parameters number
 the higher the dimensionality (parameters number) of the optimization problem, the harder it is, 
 and the slower the optimization process is.
 
-#### Table of contents:
+### Table of contents:
 
 * [Intro](https://github.com/EliorBenYosef/evolutionary-algorithms#intro)
 * [How to use](https://github.com/EliorBenYosef/evolutionary-algorithms#how-to-use)
@@ -47,10 +47,20 @@ and the slower the optimization process is.
 ## Intro
 
 ###  Evolutionary Algorithms
-under construction.
+black-box optimization via evolution.
+Evolving a population of fixed-length vector toward a chosen (same-length) target string.
+starts random-valued (starts with random values)
+
+<p align="center">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/EvoAlgo_bear.jpeg" width="400">
+</p>
+
+####  Genetic Algorithm
+
+####  Evolution Strategy
 
 ###  Optimization Problems
-under construction.
+
 
 ## Results
 optimization process results:
@@ -89,21 +99,28 @@ layers: 4-25-10-2.
 ## Genetic Algorithms Comparison
 
 #### Rastrigin function (100 input parameters)
-Notice how the optimization is better with a larger population size.
+Notice how the optimization is better with a higher (and constant) mutation sigma.
 
+**Sigma = 1**
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/Rastrigin100D-Pop100-Avg-Sigma1.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/Rastrigin100D-Pop100-Max-Sigma1.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Avg-Sigma1.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Max-Sigma1.png" width="400">
 </p>
 
+**Sigma = 0.5**
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/Rastrigin100D-Pop100-Avg-Sigma0.5.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/Rastrigin100D-Pop100-Max-Sigma0.5.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Avg-Sigma0.5.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Max-Sigma0.5.png" width="400">
 </p>
 
+**Sigma: Init = 0.5, Decay = 0.9, Min = 0.01**
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/Rastrigin100D-Pop100-Avg-Sigma0.5_Min0.01_Decay0.9.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/Rastrigin100D-Pop100-Max-Sigma0.5_Min0.01_Decay0.9.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Avg-Sigma0.5_Min0.01_Decay0.9.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Max-Sigma0.5_Min0.01_Decay0.9.png" width="400">
+</p>
+
+<p align="center">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Legend.png" width="400">
 </p>
 
 ## How to use
