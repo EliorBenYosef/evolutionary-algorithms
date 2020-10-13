@@ -71,7 +71,7 @@ optimization process results:
 
 Legend:
 <p align="center">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/Legend.png" width="800">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/Legend.png" width="400">
 </p>
 
 
