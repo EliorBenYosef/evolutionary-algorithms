@@ -1,12 +1,7 @@
 """
-Optimizing: String characters (discrete-valued vector).
-the String is converted into a discrete-number vector.
-
-Evolving a population of (fixed-length) random strings toward a chosen (same-length) target string.
-
-Running the algorithm:
-* Using a 12 characters target string - should take a few minutes on a modern CPU.
-* Using a longer (>12 characters) target string - will take much more time and resources to evolve.
+Optimizing: fixed-length String (discrete-valued vector) towards a chosen target String of 12 characters.
+For generality purposes, the String (individual & target) is converted into a discrete-number vector (and vice-versa),
+    which is optimized..
 """
 
 from difflib import SequenceMatcher

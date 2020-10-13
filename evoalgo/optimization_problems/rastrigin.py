@@ -1,5 +1,5 @@
 """
-Optimizing: Rastrigin function params.
+Optimizing: Rastrigin function's input parameters (x).
 """
 
 import numpy as np

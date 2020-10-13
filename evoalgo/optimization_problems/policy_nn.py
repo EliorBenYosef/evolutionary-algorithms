@@ -1,6 +1,10 @@
 """
-Optimizing a policy NN (state --> probability distribution over actions) in the CartPole environment.
-Optimizing: NN params (weights and biases).
+Optimizing: Policy Neural-Network's parameters (layers' weights and biases), for autonomous agent control.
+Policy Neural Network I/O: environment state --> probability distribution over actions.
+
+Any AI Gym environment can be chosen, as long as the relevant variables parameters
+(`env_name`, `input_dims`, `n_actions`, `optimal_fit`) are changed accordingly.
+Here, AI Gym's CartPole environment is chosen as an example.
 """
 
 import numpy as np
