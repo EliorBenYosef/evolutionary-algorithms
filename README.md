@@ -69,11 +69,17 @@ optimization process results:
 
 ## Evolutionary Algorithms Comparison
 
+Legend:
+<p align="center">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/Legend.png" width="800">
+</p>
+
+
 #### Rastrigin function (100 input parameters)
 
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/Rastrigin100D-Pop100-Avg.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/Rastrigin100D-Pop100-Max.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/Rastrigin100D-Pop100-Avg.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/Rastrigin100D-Pop100-Max.png" width="400">
 </p>
 
 #### Policy Neural-Network (407 parameters)
@@ -81,49 +87,49 @@ Environment: CartPole.
 layers: 4-25-10-2.
 
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/CartPole407D-Pop500-Avg.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/CartPole407D-Pop500-Max.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/CartPole407D-Pop500-Avg.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/CartPole407D-Pop500-Max.png" width="400">
 </p>
 
 ## Genetic Algorithms Comparison
+
+Legend:
+<p align="center">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/Legend.png" width="800">
+</p>
 
 #### String (12 characters)
 Notice how the optimization is better with a larger population size.
 
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/String12D-Pop1000-Avg.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/String12D-Pop1000-Max.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/String12D-Pop1000-Avg.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/String12D-Pop1000-Max.png" width="400">
 </p>
 
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/String12D-Pop100-Avg.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/String12D-Pop100-Max.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/String12D-Pop100-Avg.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/String12D-Pop100-Max.png" width="400">
 </p>
 
 #### Rastrigin function (100 input parameters)
 Notice how the optimization is better with a higher (and constant) mutation sigma.
 
-Legend:
-<p align="center">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Legend.png" width="800">
-</p>
-
 **Sigma = 1**
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Avg-Sigma1.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Max-Sigma1.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/Rastrigin100D-Pop100-Avg-Sigma1.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/Rastrigin100D-Pop100-Max-Sigma1.png" width="400">
 </p>
 
 **Sigma = 0.5**
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Avg-Sigma0.5.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Max-Sigma0.5.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/Rastrigin100D-Pop100-Avg-Sigma0.5.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/Rastrigin100D-Pop100-Max-Sigma0.5.png" width="400">
 </p>
 
 **Sigma: Init = 0.5, Decay = 0.9, Min = 0.01**
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Avg-Sigma0.5_Min0.01_Decay0.9.png" width="400">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/results/cut/Rastrigin100D-Pop100-Max-Sigma0.5_Min0.01_Decay0.9.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/Rastrigin100D-Pop100-Avg-Sigma0.5_Min0.01_Decay0.9.png" width="400">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/Rastrigin100D-Pop100-Max-Sigma0.5_Min0.01_Decay0.9.png" width="400">
 </p>
 
 ## How to use
