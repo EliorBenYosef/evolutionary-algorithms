@@ -70,8 +70,8 @@ optimization process results:
 ## Evolutionary Algorithms Comparison
 
 Legend:
-<p align="center">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/Legend.png" width="400">
+<p align="left">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/Legend.png" width="200">
 </p>
 
 
@@ -93,8 +93,21 @@ layers: 4-25-10-2.
 
 ## Genetic Algorithms Comparison
 
+* **Selection** options:
+  * fitness-proportionate selection (FPS)
+  * stochastic top-sampling (STS) selection
+  * tournament (Tour) selection
+* **Crossover** options:
+  * Single-point crossover(1PtCross)
+  * Two-point crossover(2PtCross)
+  * Uniform crossover(UniCross)
+* **Mutation** options:
+  * Deterministic mutation (DetMut)
+  * Stochastic uniform mutation (StoUniMut)
+  * Gaussian-noise mutation (GaussMut)
+
 Legend:
-<p align="center">
+<p align="left">
   <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ga_comparison/Legend.png" width="800">
 </p>
 
