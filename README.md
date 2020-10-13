@@ -1,6 +1,8 @@
 # Evolutionary Algorithms implementations
 Evolutionary Algorithms implementations, for various (discrete & continuous) optimization problems.
 
+<img align="right" src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/EvoAlgo_bear.jpeg" width="400">
+
 ### TL;DR
 
 **Evolutionary Algorithms (EAs):**
@@ -53,10 +55,6 @@ black-box optimization via evolution.
 Evolving a population of fixed-length vector toward a chosen (same-length) target string.
 starts random-valued (starts with random values)
 
-<p align="center">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/EvoAlgo_bear.jpeg" width="400">
-</p>
-
 ####  Genetic Algorithm
 
 ####  Evolution Strategy
@@ -71,7 +69,7 @@ optimization process results:
 
 Legend:
 <p align="left">
-  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/Legend.png" width="200">
+  <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/Legend.png" width="300">
 </p>
 
 
