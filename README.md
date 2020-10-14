@@ -1,42 +1,26 @@
 # Evolutionary Algorithms implementations
 Evolutionary Algorithms implementations, for various (discrete & continuous) optimization problems.
 
-<img align="right" src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/EvoAlgo_bear.jpeg" width="400">
-
 ### TL;DR
 
+This repository contains implementations of the following:
+
 **Evolutionary Algorithms (EAs):**
-* [Genetic Algorithm (GA)](../master/evoalgo/evolutionary_algorithms/genetic_algorithm.py)
-  * using various Selection, Crossover & Mutation strategies.
-* [Evolution Strategy (ES)](../master/evoalgo/evolutionary_algorithms/evolution_strategy.py)
-  * PEPG
-  * OpenAI-ES
-  * CMA-ES
+* [Genetic Algorithm (GA)](../master/evoalgo/evolutionary_algorithms/genetic_algorithm.py) -
+with multiple choices of Selection, Crossover & Mutation strategies.
+* [Evolution Strategy (ES)](../master/evoalgo/evolutionary_algorithms/evolution_strategy.py) -
+PEPG, OpenAI-ES, CMA-ES.
 
 **Optimization problems (of increasing difficulty):**
-* [String](../master/evoalgo/optimization_problems/string_opt.py) - 
-optimizing a fixed-length String (discrete-valued vector) towards a chosen target String of 12 characters.
-  * For generality purposes, the String (individual & target) is converted into a discrete-number vector (and vice-versa), 
-  which is optimized.
-* [Rastrigin function](../master/evoalgo/optimization_problems/rastrigin.py) -
-optimizing the Rastrigin function's input parameters (x).
-* [Policy Neural-Network](../master/evoalgo/optimization_problems/policy_nn.py) 
-**for autonomous agent control** - 
-optimizing the Policy Neural-Network's parameters (layers' weights and biases)
-  * A Policy network receives the **environment state** as an input, 
-  and outputs a **probability distribution over all possible actions**.
-  * Any AI Gym environment can be chosen, as long as the relevant variables parameters
-  (`env_name`, `input_dims`, `n_actions`, `optimal_fit`) are changed accordingly.
-  Here, AI Gym's **CartPole** environment is chosen as an example.
 
 Optimization problem | Type | Parameters number
 --- | --- | ---
-**String** | Discrete-number vector | 12
-**Rastrigin function** | Real-number vector | 100
-**Policy Neural Network for autonomous agent control** | Real-number vector | 407
+**[String](../master/evoalgo/optimization_problems/string_opt.py)** | Discrete-number vector | 12
+**[Rastrigin function](../master/evoalgo/optimization_problems/rastrigin.py)** | Real-number vector | 100
+**[Policy Neural-Network](../master/evoalgo/optimization_problems/policy_nn.py) for autonomous agent control** | Real-number vector | 407
 
-the higher the dimensionality (parameters number) of the optimization problem, the harder it is, 
-and the slower the optimization process is.
+Note that the higher the dimensionality (parameters number) of the optimization problem, 
+the harder it is, and the slower the optimization process is.
 
 ### Table of contents:
 
@@ -50,17 +34,54 @@ and the slower the optimization process is.
 
 ## Intro
 
+<img align="right" src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/EvoAlgo_bear.jpeg" width="400">
+
 ###  Evolutionary Algorithms
-black-box optimization via evolution.
-Evolving a population of fixed-length vector toward a chosen (same-length) target string.
-starts random-valued (starts with random values)
+A family of problem-independent, gradient-free, population-based, metaheuristic or stochastic, 
+global optimization algorithms.
+
+Inspired by the biological concept of **evolution by natural selection** - 
+a population of candidate solution models follows an evolutionary process towards optimality 
+(optimization via evolution).
 
 ####  Genetic Algorithm
+Employs a more **biologically-accurate** form of evolution - utilizes a loop of 
+parents **selection**, reproduction via **crossover** (AKA genetic recombination) and **mutation**.
 
 ####  Evolution Strategy
+Employs a more **mathematical** (and less biologically-accurate) form of evolution -
+a single parent produces multiple variants of itself via **cloning** and **mutation** 
+(a small amount of random noise).
+After the new population is evaluated, a single parent is created using a weighted-sum of 
+all the individuals (AKA population averaging).
 
 ###  Optimization Problems
 
+####  String
+Optimizing a fixed-length String (discrete-valued vector) towards a chosen target String 
+of 12 characters.
+
+For generality purposes, the String (individual & target) is converted into a discrete-number 
+vector (and vice-versa), which is optimized.
+
+<img align="right" src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/Rastrigin_function.png" width="400">
+
+####  Rastrigin function
+Optimizing the Rastrigin function's input parameters (x).
+
+The Rastrigin function is a **non-convex** function (with multiple local minima),
+and is used as a performance-test problem for optimization algorithms.
+It is a typical example of non-linear multimodal function.
+
+####  Policy Neural-Network for autonomous agent control
+Optimizing the Policy Neural-Network's parameters (layers' weights and biases).
+
+A Policy network receives the **environment state** as an input, 
+and outputs a **probability distribution over all possible actions**.
+
+Any AI Gym environment can be chosen, as long as the relevant variables parameters
+(`env_name`, `input_dims`, `n_actions`, `optimal_fit`) are changed accordingly.
+Here, AI Gym's **CartPole** environment is chosen as an example.
 
 ## Results
 optimization process results:
@@ -71,7 +92,6 @@ Legend:
 <p align="left">
   <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/Legend.png" width="300">
 </p>
-
 
 #### Rastrigin function (100 input parameters)
 
