@@ -102,7 +102,8 @@ Legend:
 
 #### Policy Neural-Network (407 parameters)
 Environment: CartPole.
-layers: 4-25-10-2.
+
+Neural-Network layers' units number: (Input) 4,25,10,2 (Output).
 
 <p align="left">
   <img src="https://github.com/EliorBenYosef/evolutionary-algorithms/blob/master/images/results/ea_comparison/CartPole407D-Pop500-Avg.png" width="400">
