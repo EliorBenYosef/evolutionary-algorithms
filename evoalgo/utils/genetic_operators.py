@@ -297,11 +297,13 @@ class Mutation:
         """
         sampling epsilon (gaussian-noise vector), which constitutes the mutation.
         :param params_num: vector's length
-        :param antithetic_sampling:
+        :param antithetic_sampling: sample noise vector only for half of the population,
+        the other half gets the opposite-sign (-) of the noise.
+        antithetic sampling reduces the variance in the gradient estimate.
         :return: epsilon (gaussian-noise vector)
         """
         if antithetic_sampling:
-            # half of the population have some params, and the other half has the opposite params (sign change)
+            assert (pop_size % 2 != 0), "Antithetic sampling requires even population size"
             epsilon_half = np.random.randn(int(pop_size / 2), params_num)
             epsilon = np.concatenate([epsilon_half, -epsilon_half])
         else:

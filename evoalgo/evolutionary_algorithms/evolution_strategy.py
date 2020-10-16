@@ -84,7 +84,7 @@ class OpenAI_ES:
         :param alpha_decay: annealing the learning rate. alpha_decay=1.0 --> don't anneal the learning rate
         :param alpha_min: stop annealing learning rate
         :param antithetic_sampling: antithetic sampling of epsilon (gaussian-noise vector).
-               half of the population have some params, and the other half has the opposite params (sign change)
+               half of the population have some params, and the other half has the opposite params (sign change).
         :param rank_fitness: rank-based fitness-shaping - use rank rather than fitness numbers.
         """
         self.params_num = params_num
@@ -104,7 +104,7 @@ class OpenAI_ES:
         self.epsilon = None
         self.antithetic_sampling = antithetic_sampling
         if self.antithetic_sampling:
-            if self.pop_size % 2 != 0:  # Antithetic sampling requires even population size
+            if self.pop_size % 2 != 0:  # Antithetic sampling -> requires even pop_size
                 self.pop_size += 1
 
         ####################################
@@ -204,7 +204,7 @@ class PEPG:
         """
         self.params_num = params_num
         self.pop_size = pop_size
-        if self.pop_size % 2 == 0:  # Antithetic sampling + self.population[-1] == self.mu -> odd pop_size
+        if self.pop_size % 2 == 0:  # (Antithetic sampling) + (self.population[-1] == self.mu) -> requires odd pop_size
             self.pop_size += 1
         self.rank_fitness = rank_fitness
         self.elite_ratio = elite_ratio
@@ -249,7 +249,7 @@ class PEPG:
 
     def update_pop(self):
         # sampling epsilon (gaussian-noise vector), which constitutes the mutation:
-        # antithetic_sampling:
+        # antithetic sampling (#antithetic_sampling):
         self.epsilon_half = np.random.randn(int(self.pop_size / 2), self.params_num) * self.sigma[None, :]
         self.epsilon = np.concatenate([self.epsilon_half, - self.epsilon_half, np.zeros((1, self.params_num))])
         self.population = self.mu[None, :] + self.epsilon  # self.population[-1] == self.mu
