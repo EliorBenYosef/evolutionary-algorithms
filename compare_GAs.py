@@ -3,7 +3,7 @@ import datetime
 import evoalgo.evolutionary_algorithms.genetic_algorithm as GA
 import evoalgo.utils.genetic_operators as GenOp
 from evoalgo.utils.evolution_process import Evolution
-from evoalgo.utils.utils import Plotter
+from evoalgo.utils.utils import colors_28, plot_fit_history_comparison
 from evoalgo.optimization_problems.policy_nn import max_gen_num, pop_size, params_num, task_name, \
     fitness_function, optimal_fit  # , discrete_values_num  # import only when optimizing the string
 
@@ -23,7 +23,7 @@ def run_algo(selection_f, crossover_f, mutation_f, key):
 
     Evolution.test_solver(ga, max_gen_num, task_name, fitness_function,
                           selection_f, crossover_f, mutation_f,
-                          plot_fit_history=False, print_fit_progress=False)
+                          plot_fit_history=False, print_progress=False)
     max_fit_history_dict[key] = ga.pop_max_fit_history
     avg_fit_history_dict[key] = ga.pop_avg_fit_history
 
@@ -49,10 +49,10 @@ def compare_genetic_algorithms():
                 run_algo(selection_f, crossover_f, mutation_f, description)
                 print(f"{description} ~~~ Runtime: {str(datetime.datetime.now() - start_time).split('.')[0]}")
 
-    Plotter.plot_fit_history_comparison(
-        max_fit_history_dict, 'Max', max_gen_num, task_name, pop_size, Plotter.colors_28, optimal_fit, algo_type)
-    Plotter.plot_fit_history_comparison(
-        avg_fit_history_dict, 'Avg', max_gen_num, task_name, pop_size, Plotter.colors_28, optimal_fit, algo_type)
+    plot_fit_history_comparison(
+        max_fit_history_dict, 'Max', max_gen_num, task_name, pop_size, colors_28, optimal_fit, algo_type)
+    plot_fit_history_comparison(
+        avg_fit_history_dict, 'Avg', max_gen_num, task_name, pop_size, colors_28, optimal_fit, algo_type)
 
 
 if __name__ == '__main__':
