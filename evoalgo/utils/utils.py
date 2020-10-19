@@ -47,13 +47,17 @@ def plot_fit_history_comparison(fit_history_dict, fit_history_type, max_gen_num,
 
     plt.xlim(0, max_gen_num)
 
+    x = [i + 1 for i in range(max_gen_num)]
+
     handles = []
     if optimal_fit is not None:
-        line_optimum, = plt.plot([optimal_fit] * max_gen_num, color="black", linewidth=0.5, linestyle="-.", label='Global Optimum')
+        line_optimum, = plt.plot(x, [optimal_fit] * max_gen_num, label='Global Optimum',
+                                 linewidth=0.5, linestyle="-.", color="black")
         handles.append(line_optimum)
     for i, (method_name, fit_history) in enumerate(fit_history_dict.items()):
-        line, = plt.plot(fit_history, color=colors[i], linewidth=1.0, linestyle="-", label=method_name)
-        # line, = plt.plot(fit_history, linewidth=1.0, linestyle="-", label=method_name)
+        line, = plt.plot(x, fit_history, label=method_name, linewidth=1.0, linestyle="-", color=colors[i])
+        # line, = plt.plot(x, fit_history, label=method_name, linewidth=1.0, linestyle="-")  # auto colors
+
         handles.append(line)
 
     plt.legend(handles=handles, bbox_to_anchor=(1.01, 0), loc="lower left")
