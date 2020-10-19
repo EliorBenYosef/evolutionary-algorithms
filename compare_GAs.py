@@ -23,7 +23,7 @@ def run_algo(selection_f, crossover_f, mutation_f, key):
 
     Evolution.test_solver(ga, max_gen_num, task_name, fitness_function,
                           selection_f, crossover_f, mutation_f,
-                          plot_fit_history=False, print_progress=False)
+                          plot=False, print_progress=False)
     max_fit_history_dict[key] = ga.pop_max_fit_history
     avg_fit_history_dict[key] = ga.pop_avg_fit_history
 

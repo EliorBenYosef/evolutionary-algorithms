@@ -42,7 +42,7 @@ def run_genetic_algorithms(max_gen_num, pop_size, params_num, task_name,
 
                 Evolution.test_solver(ga, max_gen_num, task_name, fitness_function,
                                       selection_f, crossover_f, mutation_f,
-                                      plot_fit_history=True, print_progress=True)
+                                      plot=True, print_progress=True)
 
                 description = f'{selection_key} {crossover_key} {mutation_key}'
                 max_fit_history_dict[description] = ga.pop_max_fit_history

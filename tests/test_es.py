@@ -14,7 +14,7 @@ def run_oes(max_gen_num, pop_size, params_num, task_name, fitness_function,
                               alpha_init=0.1, alpha_decay=1.0,
                               antithetic_sampling=antithetic_sampling, rank_fitness=rank_fitness)
     Evolution.test_solver(open_ai_es, max_gen_num, task_name, fitness_function,
-                          plot_fit_history=True, print_progress=True)
+                          plot=True, print_progress=True)
     return open_ai_es
 
 
@@ -24,7 +24,7 @@ def run_pepg(max_gen_num, pop_size, params_num, task_name, fitness_function,
                    alpha_init=0.1, alpha_decay=1.0,
                    avg_fit_baseline=avg_fit_baseline, rank_fitness=rank_fitness)
     Evolution.test_solver(pepg, max_gen_num, task_name, fitness_function,
-                          plot_fit_history=True, print_progress=True)
+                          plot=True, print_progress=True)
     return pepg
 
 
@@ -43,7 +43,7 @@ def run_evolution_strategy_algorithms(max_gen_num, pop_size, params_num, task_na
     # CMA-ES
     cma_es = ES.CMA_ES(params_num, pop_size, sigma_init=0.5)
     Evolution.test_solver(cma_es, max_gen_num, task_name, fitness_function,
-                          plot_fit_history=True, print_progress=True)
+                          plot=True, print_progress=True)
     max_fit_history_dict['CMA-ES'] = cma_es.pop_max_fit_history
     avg_fit_history_dict['CMA-ES'] = cma_es.pop_avg_fit_history
 
