@@ -303,7 +303,7 @@ class Mutation:
         :return: epsilon (gaussian-noise vector)
         """
         if antithetic_sampling:
-            assert (pop_size % 2 != 0), "Antithetic sampling requires even population size"
+            assert (pop_size % 2 == 0), "Antithetic sampling requires even population size"
             epsilon_half = np.random.randn(int(pop_size / 2), params_num)
             epsilon = np.concatenate([epsilon_half, -epsilon_half])
         else:

@@ -7,7 +7,7 @@ class Evolution:
     @staticmethod
     def test_solver(solver, max_gen_num, task_name, fitness_f,
                     selection_f=None, crossover_f=None, mutation_f=None,
-                    plot=True, print_progress=True):
+                    print_progress=True, plot=True, show=False, save=True):
         """
         uses solver (evolutionary algorithm) to solve fit_func.
         :param solver: an optimization method
@@ -28,5 +28,5 @@ class Evolution:
             #     break
 
         if plot:
-            plot_fit_history(solver.pop_max_fit_history, 'Max', max_gen_num, task_name)
-            plot_fit_history(solver.pop_avg_fit_history, 'Average', max_gen_num, task_name)
+            plot_fit_history(solver.pop_max_fit_history, 'Max', max_gen_num, task_name, show, save)
+            plot_fit_history(solver.pop_avg_fit_history, 'Average', max_gen_num, task_name, show, save)

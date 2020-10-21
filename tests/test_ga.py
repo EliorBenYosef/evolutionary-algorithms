@@ -42,23 +42,24 @@ def run_genetic_algorithms(max_gen_num, pop_size, params_num, task_name,
 
                 Evolution.test_solver(ga, max_gen_num, task_name, fitness_function,
                                       selection_f, crossover_f, mutation_f,
-                                      plot=True, print_progress=True)
+                                      print_progress=True, plot=True, save=False)
 
                 description = f'{selection_key} {crossover_key} {mutation_key}'
                 max_fit_history_dict[description] = ga.pop_max_fit_history
                 avg_fit_history_dict[description] = ga.pop_avg_fit_history
 
-    plot_fit_history_comparison(
-        max_fit_history_dict, 'Max', max_gen_num, task_name, pop_size, colors_28, optimal_fit, algo_type)
-    plot_fit_history_comparison(
-        avg_fit_history_dict, 'Avg', max_gen_num, task_name, pop_size, colors_28, optimal_fit, algo_type)
+    plot_fit_history_comparison(max_fit_history_dict, 'Max', max_gen_num, task_name, pop_size, optimal_fit, algo_type)
+    plot_fit_history_comparison(avg_fit_history_dict, 'Avg', max_gen_num, task_name, pop_size, optimal_fit, algo_type)
 
 
-def test_optimization_problems():
-    """
-    Runs the algorithms with a population of 100, for 100 generation.
-    """
-    run_genetic_algorithms(100, 100, params_num_str, task_name_str, fitness_function_str, optimal_fit_str,
+def test_string():
+    run_genetic_algorithms(100, 10, params_num_str, task_name_str, fitness_function_str, optimal_fit_str,
                            discrete_values_num_str)
-    run_genetic_algorithms(100, 100, params_num_rst, task_name_rst, fitness_function_rst, optimal_fit_rst)
-    run_genetic_algorithms(100, 100, params_num_nn, task_name_nn, fitness_function_nn, optimal_fit_nn)
+
+
+def test_rastrigin():
+    run_genetic_algorithms(100, 10, params_num_rst, task_name_rst, fitness_function_rst, optimal_fit_rst)
+
+
+def test_nn():
+    run_genetic_algorithms(100, 10, params_num_nn, task_name_nn, fitness_function_nn, optimal_fit_nn)

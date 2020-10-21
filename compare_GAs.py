@@ -23,7 +23,7 @@ def run_algo(selection_f, crossover_f, mutation_f, key):
 
     Evolution.test_solver(ga, max_gen_num, task_name, fitness_function,
                           selection_f, crossover_f, mutation_f,
-                          plot=False, print_progress=False)
+                          print_progress=False, plot=False)
     max_fit_history_dict[key] = ga.pop_max_fit_history
     avg_fit_history_dict[key] = ga.pop_avg_fit_history
 
@@ -49,10 +49,10 @@ def compare_genetic_algorithms():
                 run_algo(selection_f, crossover_f, mutation_f, description)
                 print(f"{description} ~~~ Runtime: {str(datetime.datetime.now() - start_time).split('.')[0]}")
 
-    plot_fit_history_comparison(
-        max_fit_history_dict, 'Max', max_gen_num, task_name, pop_size, colors_28, optimal_fit, algo_type)
-    plot_fit_history_comparison(
-        avg_fit_history_dict, 'Avg', max_gen_num, task_name, pop_size, colors_28, optimal_fit, algo_type)
+    plot_fit_history_comparison(max_fit_history_dict, 'Max', max_gen_num, task_name, pop_size, optimal_fit, algo_type,
+                                colors=colors_28)
+    plot_fit_history_comparison(avg_fit_history_dict, 'Avg', max_gen_num, task_name, pop_size, optimal_fit, algo_type,
+                                colors=colors_28)
 
 
 if __name__ == '__main__':
