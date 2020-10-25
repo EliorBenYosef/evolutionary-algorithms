@@ -40,7 +40,7 @@ class Selection:
         :param top_ratio: default: 0.1 -> top 10% of the population.
         """
         pop_size = len(population_sort)
-        rand_elite_pair_indices = np.random.randint(low=0, high=(int(top_ratio * pop_size)), size=2)
+        rand_elite_pair_indices = np.random.default_rng().choice(int(top_ratio * pop_size), size=2, replace=False)
 
         p1_params = population_sort[rand_elite_pair_indices[0]][KEY_PARAMS_VEC]
         p2_params = population_sort[rand_elite_pair_indices[1]][KEY_PARAMS_VEC]
@@ -54,7 +54,7 @@ class Selection:
         :param tournament_ratio: default: 0.2 -> random 20% of the population.
         """
         pop_size = len(population)
-        rand_indices = np.random.randint(low=0, high=pop_size, size=(int(tournament_ratio * pop_size)))
+        rand_indices = np.random.default_rng().choice(pop_size, size=(int(tournament_ratio * pop_size)), replace=False)
         batch = np.array([[i, individual[KEY_FITNESS]] for (i, individual) in enumerate(population)
                           if i in rand_indices])
         batch_sort = batch[batch[:, 1].argsort()]  # sort by ascending fitness-score
@@ -174,14 +174,8 @@ class Crossover:
         :param params_num: vector's length
         :return: o1_params, o2_params
         """
-        cross_pt_1, cross_pt_2, cross_pt_low, cross_pt_high = 0, 0, 0, 0
-        while cross_pt_1 == cross_pt_2:
-            cross_pt_1, cross_pt_2 = np.random.randint(low=1, high=params_num, size=2)
-            if cross_pt_1 != cross_pt_2:
-                if cross_pt_1 < cross_pt_2:
-                    cross_pt_low, cross_pt_high = cross_pt_1, cross_pt_2
-                else:
-                    cross_pt_low, cross_pt_high = cross_pt_2, cross_pt_1
+        cross_pts = np.random.default_rng().choice(params_num - 1, size=2, replace=False) + 1
+        cross_pt_low, cross_pt_high = min(cross_pts), max(cross_pts)
 
         o1 = np.copy(p1)
         o1[cross_pt_low:cross_pt_high] = p2[cross_pt_low:cross_pt_high]
@@ -229,10 +223,11 @@ class Mutation:
         mut_num = int(mut_rate * params_num)  # number of elements to mutate
 
         if mut_num > 0:
-            mut_indices = np.random.randint(low=0, high=params_num, size=(mut_num,))
+            mut_indices = np.random.default_rng().choice(params_num, size=mut_num, replace=False)
             if discrete_values_num is not None:
                 # randomly flipping values (replacing them with random values)
-                individual[mut_indices] = np.random.randint(low=0, high=discrete_values_num, size=mut_num)
+                individual[mut_indices] = np.random.default_rng().choice(
+                    discrete_values_num, size=mut_num, replace=False)
             else:
                 # sample a random number from a standard normal distribution (mean 0, variance 1)
                 # the division gives a number which is close to 0 -> good for the NN weights.
@@ -254,7 +249,7 @@ class Mutation:
             if random.random() < mut_rate:
                 if discrete_values_num is not None:
                     # randomly flipping values (replacing them with random values)
-                    individual[i] = np.random.randint(low=0, high=discrete_values_num)
+                    individual[i] = np.random.randint(discrete_values_num)
                 else:
                     # sample a random number from a standard normal distribution (mean 0, variance 1)
                     # the division gives a number which is close to 0 -> good for the NN weights.

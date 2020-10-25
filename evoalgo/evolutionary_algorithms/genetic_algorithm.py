@@ -60,7 +60,7 @@ class SimpleGA:
         for i in range(self.pop_size):
 
             if self.discrete_values_num is not None:
-                param = np.random.randint(low=0, high=self.discrete_values_num, size=self.params_num)
+                param = np.random.randint(self.discrete_values_num, size=self.params_num)
             else:
                 # sample a random number from a standard normal distribution (mean 0, variance 1)
                 param = np.random.randn(self.params_num)
