@@ -53,13 +53,13 @@ def run_genetic_algorithms(max_gen_num, pop_size, params_num, task_name,
 
 
 def test_string():
-    run_genetic_algorithms(100, 10, params_num_str, task_name_str, fitness_function_str, optimal_fit_str,
+    run_genetic_algorithms(10, 20, params_num_str, task_name_str, fitness_function_str, optimal_fit_str,
                            discrete_values_num_str)
 
 
 def test_rastrigin():
-    run_genetic_algorithms(100, 10, params_num_rst, task_name_rst, fitness_function_rst, optimal_fit_rst)
+    run_genetic_algorithms(10, 20, params_num_rst, task_name_rst, fitness_function_rst, optimal_fit_rst)
 
 
 def test_nn():
-    run_genetic_algorithms(100, 10, params_num_nn, task_name_nn, fitness_function_nn, optimal_fit_nn)
+    run_genetic_algorithms(10, 20, params_num_nn, task_name_nn, fitness_function_nn, optimal_fit_nn)
