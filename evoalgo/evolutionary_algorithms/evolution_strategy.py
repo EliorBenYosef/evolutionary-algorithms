@@ -14,7 +14,7 @@ import evoalgo.utils.genetic_operators as GenOp
 
 class CMA_ES:
     """
-    CMA-ES algorithm (cma's CMAEvolutionStrategy) wrapper.
+    CMA-ES (Covariance Matrix Adaptation) algorithm (cma's CMAEvolutionStrategy) wrapper.
     """
 
     def __init__(self, params_num, pop_size, sigma_init=0.1):
