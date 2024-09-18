@@ -1,5 +1,5 @@
 numpy~=2.0.2
 matplotlib~=3.9.2
 gym~=0.26.2
-torch~=1.13.1
+torch~=2.4.1
 cma~=4.0.0
